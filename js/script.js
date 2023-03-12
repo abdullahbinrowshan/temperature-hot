@@ -13,9 +13,19 @@ const loadTemperature = async city => {
 }
 
 const displayTemperature = data => {
-    console.log(data);
-    const temperature = document.getElementById('temperature');
-    temperature.innerText = data.main.temp;
+    setInnerTextById('temperature', data.main.temp);
+    setInnerTextById('city', data.name);
+    setInnerTextById('condition', data.weather[0].main);
 }
+
+const setInnerTextById = (id, text) => {
+    document.getElementById(id).innerText = text;
+}
+
+document.getElementById('search-btn').addEventListener('click', () => {
+    const city = document.getElementById('input-field');
+    loadTemperature(city.value)
+    city.value = '';
+})
 
 loadTemperature('comilla')
